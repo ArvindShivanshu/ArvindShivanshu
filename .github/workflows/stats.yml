@@ -1,11 +1,17 @@
 name: refresh stats
 
-# Deliberately no `push` trigger: this job commits stats.svg, and a push
-# trigger would make it re-run on its own commit.
 on:
   schedule:
-    - cron: "17 5 * * *"
+    # Run every 30 minutes to keep stats realtime
+    - cron: "*/30 * * * *"
   workflow_dispatch:
+  repository_dispatch:
+    types: [refresh]
+  push:
+    branches:
+      - main
+    paths-ignore:
+      - "*.svg"
 
 permissions:
   contents: write
@@ -37,5 +43,5 @@ jobs:
           git config user.name  "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add -- $FILES
-          git commit -m "stats: refresh profile graphics"
+          git commit -m "stats: refresh profile graphics [skip ci]"
           git push

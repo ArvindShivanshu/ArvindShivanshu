@@ -25,17 +25,11 @@ AI-driven academic infrastructure, and high-performance full-stack web applicati
 
 <img src="./hd-projects.svg" width="620" alt="projects"/>
 
-**[Simplora](https://github.com/ArvindShivanshu)** &nbsp;·&nbsp; <samp>ai, edtech, web</samp><br>
-AI-powered school management platform and academic workflow automation.
+**[Simplora](https://simplora.in)** &nbsp;·&nbsp; <samp>ai, edtech, web</samp><br>
+The future of school management — AI-powered administration and academic workflows.
 
-**[Acadron](https://github.com/ArvindShivanshu)** &nbsp;·&nbsp; <samp>python, intelligent systems</samp><br>
-Intelligent academic infrastructure for research, learning, and computational workflows.
-
-**[Robocon-WebDev](https://github.com/ArvindShivanshu/Robocon-WebDev-ShivanshuGupta)** &nbsp;·&nbsp; <samp>react, three.js, cad</samp><br>
-Robotics team interactive CAD visualizer and web engineering studio.
-
-**[AntiGravity](https://github.com/ArvindShivanshu/AntiGravity)** &nbsp;·&nbsp; <samp>developer tools, agentic systems</samp><br>
-Explorations and extensions for advanced developer agent workflows.
+**[Acadron](https://acadron.in)** &nbsp;·&nbsp; <samp>python, intelligent systems</samp><br>
+Autonomous academic scheduling engine and intelligent campus infrastructure.
 
 <img src="./hd-stats.svg" width="620" alt="stats"/>
 
