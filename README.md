@@ -5,8 +5,9 @@
 <img src="./stats.svg" width="620" alt="Contributions in the last year"/>
 
 [github](https://github.com/ArvindShivanshu) &nbsp;·&nbsp;
-[linkedin](https://www.linkedin.com/in/shivanshugupta/) &nbsp;·&nbsp;
-[email](mailto:shivanshuguptaarvind74879@gmail.com)
+[linkedin](https://www.linkedin.com/in/shivanshu-gupta-arvind/) &nbsp;·&nbsp;
+[contact](https://simplora.in/contact-CEO) &nbsp;·&nbsp;
+[email](mailto:shivanshu@simplora.in)
 
 </div>
 
