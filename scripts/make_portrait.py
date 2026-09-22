@@ -60,26 +60,26 @@ def prep(path, crop=None):
     if crop:
         src = src.crop(crop)
 
-    cut = remove(src)
-    alpha = np.array(cut.split()[-1])
+    arr = np.array(src)
+    # Check if the image already has an isolated white or transparent background
+    is_white = (arr[:, :, 0] > 240) & (arr[:, :, 1] > 240) & (arr[:, :, 2] > 240)
+    is_transparent = (arr[:, :, 3] < 20)
+    has_clean_bg = (is_white | is_transparent).sum() > (arr.shape[0] * arr.shape[1] * 0.15)
 
-    # Composite onto white so everything outside the subject maps to the blank
-    # end of the ramp. Skip this and the background fills with @ and %.
-    white = Image.new("RGBA", cut.size, (255, 255, 255, 255))
-    gray = np.array(Image.alpha_composite(white, cut).convert("L"))
+    if has_clean_bg:
+        gray = np.array(src.convert("L"))
+        alpha = np.where(is_white | is_transparent, 0, 255).astype(np.uint8)
+    else:
+        cut = remove(src)
+        alpha = np.array(cut.split()[-1])
+        white = Image.new("RGBA", cut.size, (255, 255, 255, 255))
+        gray = np.array(Image.alpha_composite(white, cut).convert("L"))
 
     gray = cv2.bilateralFilter(gray, 11, 50, 50)      # smooth skin, keep edges
     gray = cv2.createCLAHE(clipLimit=CLAHE_CLIP,
                            tileGridSize=(8, 8)).apply(gray)
     gray = (255.0 * (gray / 255.0) ** CURVE).astype("uint8")
     gray[alpha < 20] = 255                            # force the matte to white
-
-    # Clear the chair headrest mesh protruding beyond the ears
-    h, w = gray.shape
-    y_idx, x_idx = np.ogrid[:h, :w]
-    headrest = (y_idx >= 270) & (y_idx <= 450) & ((x_idx < 322) | (x_idx > 506))
-    gray[headrest] = 255
-
     return Image.fromarray(gray)
 
 
