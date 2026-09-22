@@ -21,7 +21,8 @@ import re
 import sys
 
 HERE = os.path.dirname(os.path.abspath(__file__))
-FONT = os.path.join(HERE, "fonts", "jbmono-ramp.woff2")
+FONT_400 = os.path.join(HERE, "fonts", "jbmono-400.woff2")
+FONT_600 = os.path.join(HERE, "fonts", "jbmono-600.woff2")
 FAMILY = ("JBMono,ui-monospace,SFMono-Regular,Menlo,Consolas,"
           "&apos;Liberation Mono&apos;,monospace")
 
@@ -32,15 +33,20 @@ def main():
     with open(target, encoding="utf-8") as f:
         svg = f.read()
 
-    if "JBMono" in svg:
-        print(f"{target}: already carries the font")
-        return
+    with open(FONT_400, "rb") as f:
+        b64_400 = base64.b64encode(f.read()).decode("ascii")
+    with open(FONT_600, "rb") as f:
+        b64_600 = base64.b64encode(f.read()).decode("ascii")
 
-    with open(FONT, "rb") as f:
-        b64 = base64.b64encode(f.read()).decode("ascii")
     rule = (f"@font-face{{font-family:JBMono;font-style:normal;"
             f"font-weight:400;font-display:block;"
-            f"src:url(data:font/woff2;base64,{b64}) format('woff2')}}")
+            f"src:url(data:font/woff2;base64,{b64_400}) format('woff2')}}"
+            f"@font-face{{font-family:JBMono;font-style:normal;"
+            f"font-weight:700;font-display:block;"
+            f"src:url(data:font/woff2;base64,{b64_600}) format('woff2')}}")
+
+    # Strip any existing JBMono @font-face rules
+    svg = re.sub(r"@font-face\{font-family:JBMono;[^\}]*\}", "", svg)
 
     if "<style>" not in svg:
         raise SystemExit(f"{target}: no <style> block to extend")
@@ -48,12 +54,15 @@ def main():
 
     # point the whole document at the embedded face
     swapped, n = re.subn(r'font-family="[^"]*"', f'font-family="{FAMILY}"', svg)
-    if not n:
+    if not n and f'font-family="{FAMILY}"' not in svg:
         raise SystemExit(f"{target}: no font-family to replace")
+    if n:
+        svg = swapped
 
     with open(target, "w", encoding="utf-8") as f:
-        f.write(swapped)
-    print(f"{target}: embedded {len(b64) // 1024} KB of base64 font")
+        f.write(svg)
+    total_kb = (len(b64_400) + len(b64_600)) // 1024
+    print(f"{target}: embedded {total_kb} KB of base64 font (regular + bold)")
 
 
 if __name__ == "__main__":

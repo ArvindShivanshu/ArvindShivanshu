@@ -30,6 +30,7 @@ revealed by a clipPath wipe with a cursor block riding its edge, staggered top
 to bottom, frozen at the end so it prints once and stops.
 """
 import argparse
+import re
 import sys
 
 import cv2
@@ -113,6 +114,23 @@ def to_lines(img, cols=COLS, gamma=GAMMA):
     return out
 
 
+def refine_chest(lines):
+    """Refine chest area to cleanly render the Simplora t-shirt logo."""
+    if len(lines) < 42:
+        return lines
+    out = list(lines)
+    # Row 39: clean downsampling blur above logo to solid fabric
+    if len(out[39]) >= 73:
+        out[39] = out[39][:56] + "#################" + out[39][73:]
+    # Row 40: render crisp Simplora text logo
+    if len(out[40]) >= 73:
+        out[40] = out[40][:56] + '### <tspan class="b">Simplora</tspan> ####' + out[40][73:]
+    # Row 41: clean downsampling artifact below logo to solid fabric
+    if len(out[41]) >= 73:
+        out[41] = out[41][:56] + "#################" + out[41][73:]
+    return out
+
+
 def build_svg(lines, cols=COLS):
     pad = 14
     width = int(cols * CHAR_W + pad * 2)
@@ -122,15 +140,22 @@ def build_svg(lines, cols=COLS):
          f'height="{height}" viewBox="0 0 {width} {height}" '
          f'font-family="{FAMILY}">',
          f'<style>.a{{fill:{FG_LIGHT}}}'
-         f'@media(prefers-color-scheme:dark){{.a{{fill:{FG_DARK}}}}}</style>']
+         f'@media(prefers-color-scheme:dark){{.a{{fill:{FG_DARK}}}}}'
+         f'.b{{fill:#1f2328;font-weight:700}}'
+         f'@media(prefers-color-scheme:dark){{.b{{fill:#ffffff;font-weight:700}}}}</style>']
 
     for i, line in enumerate(lines):
         y = pad + i * LINE_H
         begin = f"{i * ROW_DELAY:.2f}s"
         end = f"{(i + 1) * ROW_DELAY:.2f}s"
-        w = max(len(line), 1) * CHAR_W
-        safe = (line.replace("&", "&amp;").replace("<", "&lt;")
-                    .replace(">", "&gt;"))
+        visible_text = re.sub(r'<[^>]+>', '', line)
+        w = max(len(visible_text), 1) * CHAR_W
+
+        if "<tspan" in line:
+            safe = line
+        else:
+            safe = (line.replace("&", "&amp;").replace("<", "&lt;")
+                        .replace(">", "&gt;"))
 
         p.append(f'<clipPath id="c{i}"><rect x="{pad}" y="{y}" '
                  f'height="{LINE_H}" width="0">'
@@ -172,6 +197,7 @@ def main():
         crop = tuple(parts)
 
     lines = to_lines(prep(args.photo, crop), cols=args.cols)
+    lines = refine_chest(lines)
     if args.preview:
         print("\n".join(lines))
 
