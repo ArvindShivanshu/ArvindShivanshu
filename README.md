@@ -43,16 +43,3 @@ Autonomous academic scheduling engine and intelligent campus infrastructure.
 <img src="./year.svg" width="620" alt="The last year, one character per day"/>
 
 </div>
-
-<img src="./hd-about-this-page.svg" width="620" alt="about this page"/>
-
-Every graphic on this profile is self-generated, not embedded from third-party servers.<br>
-`ascii.svg` is an 800px headshot processed through a character ramp by<br>
-[`scripts/make_portrait.py`](scripts/make_portrait.py); the live stat graphics and section headings<br>
-are drawn directly from the GitHub GraphQL API by [a scheduled action](.github/workflows/stats.yml)<br>
-running daily at 05:17 UTC, committing only when numbers change.
-
-All graphics animate with SMIL inside the SVG, bypassing markdown script stripping.<br>
-The typeface is [JetBrains Mono](scripts/fonts), subset to only the glyphs drawn by each graphic<br>
-and inlined as Base64 data URIs. This guarantees exact 0.600 em monospace advance width across<br>
-all platforms without subresource network requests or external dependencies.
