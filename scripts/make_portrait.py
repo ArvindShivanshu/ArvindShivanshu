@@ -73,6 +73,13 @@ def prep(path, crop=None):
                            tileGridSize=(8, 8)).apply(gray)
     gray = (255.0 * (gray / 255.0) ** CURVE).astype("uint8")
     gray[alpha < 20] = 255                            # force the matte to white
+
+    # Clear the chair headrest mesh protruding beyond the ears
+    h, w = gray.shape
+    y_idx, x_idx = np.ogrid[:h, :w]
+    headrest = (y_idx >= 270) & (y_idx <= 450) & ((x_idx < 322) | (x_idx > 506))
+    gray[headrest] = 255
+
     return Image.fromarray(gray)
 
 
@@ -99,35 +106,11 @@ def to_lines(img, cols=COLS, gamma=GAMMA):
     while out and not out[-1].strip():
         out.pop()
 
-    # Clean unwanted side artifacts (e.g. headphone cups / background flaps)
-    cleaned = []
-    for r, line in enumerate(out):
-        chars = list(line.ljust(cols))
-        if r == 6:
-            for c in range(59, cols): chars[c] = " "
-        elif r == 7:
-            for c in range(0, 36): chars[c] = " "
-            for c in range(57, cols): chars[c] = " "
-        elif r == 8:
-            for c in range(0, 36): chars[c] = " "
-            for c in range(58, cols): chars[c] = " "
-        elif r == 9:
-            for c in range(0, 36): chars[c] = " "
-            for c in range(57, cols): chars[c] = " "
-        elif r == 10:
-            for c in range(0, 38): chars[c] = " "
-            for c in range(58, cols): chars[c] = " "
-        elif r == 11:
-            for c in range(0, 39): chars[c] = " "
-            for c in range(58, cols): chars[c] = " "
-        elif r == 12:
-            for c in range(0, 39): chars[c] = " "
-            for c in range(54, cols): chars[c] = " "
-        elif r == 13:
-            for c in range(0, 37): chars[c] = " "
-            for c in range(56, cols): chars[c] = " "
-        cleaned.append("".join(chars).rstrip())
-    return cleaned
+    while out and not out[0].strip():
+        out.pop(0)
+    while out and not out[-1].strip():
+        out.pop()
+    return out
 
 
 def build_svg(lines, cols=COLS):
