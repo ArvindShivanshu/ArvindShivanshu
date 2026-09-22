@@ -98,7 +98,36 @@ def to_lines(img, cols=COLS, gamma=GAMMA):
         out.pop(0)
     while out and not out[-1].strip():
         out.pop()
-    return out
+
+    # Clean unwanted side artifacts (e.g. headphone cups / background flaps)
+    cleaned = []
+    for r, line in enumerate(out):
+        chars = list(line.ljust(cols))
+        if r == 6:
+            for c in range(59, cols): chars[c] = " "
+        elif r == 7:
+            for c in range(0, 36): chars[c] = " "
+            for c in range(57, cols): chars[c] = " "
+        elif r == 8:
+            for c in range(0, 36): chars[c] = " "
+            for c in range(58, cols): chars[c] = " "
+        elif r == 9:
+            for c in range(0, 36): chars[c] = " "
+            for c in range(57, cols): chars[c] = " "
+        elif r == 10:
+            for c in range(0, 38): chars[c] = " "
+            for c in range(58, cols): chars[c] = " "
+        elif r == 11:
+            for c in range(0, 39): chars[c] = " "
+            for c in range(58, cols): chars[c] = " "
+        elif r == 12:
+            for c in range(0, 39): chars[c] = " "
+            for c in range(54, cols): chars[c] = " "
+        elif r == 13:
+            for c in range(0, 37): chars[c] = " "
+            for c in range(56, cols): chars[c] = " "
+        cleaned.append("".join(chars).rstrip())
+    return cleaned
 
 
 def build_svg(lines, cols=COLS):
