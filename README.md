@@ -1,16 +1,28 @@
-## Hi there 👋
+# Shivanshu Gupta
 
-<!--
-**ArvindShivanshu/ArvindShivanshu** is a ✨ _special_ ✨ repository because its `README.md` (this file) appears on your GitHub profile.
+> Founder • Builder • Developer
 
-Here are some ideas to get you started:
+I build technology products that solve real-world problems.
 
-- 🔭 I’m currently working on ...
-- 🌱 I’m currently learning ...
-- 👯 I’m looking to collaborate on ...
-- 🤔 I’m looking for help with ...
-- 💬 Ask me about ...
-- 📫 How to reach me: ...
-- 😄 Pronouns: ...
-- ⚡ Fun fact: ...
--->
+## Currently Building
+
+- 🚀 Simplora — AI-powered school management platform
+- 🧠 Acadron — intelligent academic infrastructure
+
+## Tech
+
+JavaScript • React • Node.js • Python • FastAPI • PHP • PostgreSQL
+
+## GitHub Activity
+
+<!-- GENERATED_STATS -->
+
+## Projects
+
+<!-- GENERATED_PROJECTS -->
+
+## Connect
+
+[LinkedIn](...)
+[Portfolio](...)
+[Email](...)
