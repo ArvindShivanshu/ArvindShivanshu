@@ -462,41 +462,12 @@ def draw_year(s):
 
 
 def draw_stack():
-    """Monochrome tech stack icons matching the profile ink."""
-    icons_file = os.path.join(os.path.dirname(os.path.abspath(__file__)), "icons_data.json")
-    if not os.path.exists(icons_file):
-        return ""
-    with open(icons_file, encoding="utf-8") as f:
-        icons = json.load(f)
-
-    order = ["python", "javascript", "typescript", "react", "node",
-             "fastapi", "postgresql", "docker", "git", "linux"]
-    H = 38
-    icon_size = 22
-    step = 64.0
-    start_x = 2.0
-    y = (H - icon_size) / 2.0
-
-    p = [f'<svg xmlns="http://www.w3.org/2000/svg" width="{WIDTH}" height="{H}" '
-         f'viewBox="0 0 {WIDTH} {H}" fill="none">']
-    p.append(style())
-
-    for i, k in enumerate(order):
-        if k not in icons:
-            continue
-        item = icons[k]
-        x = start_x + i * step
-        delay = 0.10 + i * 0.06
-        path = item["paths"][0]
-        p.append(f'<g opacity="0" transform="translate({x:.1f} {y:.1f})">')
-        p.append(fade(delay, 0.35))
-        p.append(f'<title>{item["label"]}</title>')
-        p.append(f'<svg width="{icon_size}" height="{icon_size}" viewBox="0 0 24 24">')
-        p.append(f'<path class="d-f" d="{path}"/>')
-        p.append("</svg></g>")
-
-    p.append("</svg>")
-    return "".join(p)
+    """Rectangular badges in authentic brand colors."""
+    stack_file = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "stack.svg")
+    if os.path.exists(stack_file):
+        with open(stack_file, encoding="utf-8") as f:
+            return f.read()
+    return ""
 
 
 # ---------------------------------------------------------------- main
