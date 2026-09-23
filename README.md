@@ -22,7 +22,7 @@ AI-driven academic infrastructure, and high-performance full-stack web applicati
 
 <img src="./hd-stack.svg" width="620" alt="stack"/>
 
-<samp>python &nbsp; javascript &nbsp; typescript &nbsp; react &nbsp; node &nbsp; fastapi &nbsp; postgresql &nbsp; docker &nbsp; git &nbsp; linux</samp>
+<img src="./stack.svg" width="620" alt="stack"/>
 
 <img src="./hd-projects.svg" width="620" alt="projects"/>
 
