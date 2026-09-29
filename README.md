@@ -6,8 +6,6 @@
 
 <br/>
 
-[![GitHub Commits Badge](https://ghcommits.com/api/badge/ArvindShivanshu.svg)](https://ghcommits.com)
-
 <a href="https://simplora.in"><img src="https://img.shields.io/badge/Website-simplora.in-0e75b6?style=flat-square&logo=google-chrome&logoColor=white" /></a>
 <a href="https://github.com/ArvindShivanshu"><img src="https://img.shields.io/github/followers/ArvindShivanshu?label=Followers&style=flat-square&color=0e75b6" /></a>
 <a href="https://github.com/ArvindShivanshu?tab=stars"><img src="https://img.shields.io/github/stars/ArvindShivanshu?label=Stars&style=flat-square&color=00D4FF" /></a>
