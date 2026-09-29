@@ -18,7 +18,7 @@
 
 ```typescript
 const shivanshuGupta = {
-  name:    "Shivanshu Gupta (ArvindShivanshu)",
+  name:    "Shivanshu Gupta",
   role:    "Founder • Builder • Systems Architect",
   focus:   ["Autonomous Systems", "AI & Agent Infrastructure", "Full-Stack Web Engineering"],
   ventures: {
