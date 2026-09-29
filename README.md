@@ -1,6 +1,6 @@
 <div align="center">
 
-<img src="https://capsule-render.vercel.app/api?type=waving&color=0:0e75b6,100:00D4FF&height=120&section=header&text=Shivanshu%20Gupta&fontSize=48&fontColor=ffffff&animation=fadeIn&fontAlignY=65" />
+<img src="./header.svg" width="854" alt="Shivanshu Gupta" />
 
 <img src="https://readme-typing-svg.herokuapp.com?font=Fira+Code&pause=1000&color=00D4FF&center=true&vCenter=true&width=620&lines=Founder+%E2%80%A2+Builder+%E2%80%A2+Developer;Founder+at+Simplora;AI+%26+Agent+Systems+Architect;Autonomous+Systems+%26+AI+Infrastructure;Full+Stack+Developer+%26+Systems+Builder" alt="Typing SVG" />
 
