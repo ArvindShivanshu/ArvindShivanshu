@@ -31,15 +31,3 @@ The future of school management — AI-powered administration and academic workf
 
 **[Acadron](https://acadron.in)** &nbsp;·&nbsp; <samp>python, intelligent systems</samp><br>
 Autonomous academic scheduling engine and intelligent campus infrastructure.
-
-<img src="./hd-stats.svg" width="620" alt="stats"/>
-
-<div align="center">
-
-<img src="./streak.svg" width="620" alt="Current and longest streak"/>
-
-<img src="./langs.svg" width="620" alt="Top languages by bytes and by repo"/>
-
-<img src="./year.svg" width="620" alt="The last year, one character per day"/>
-
-</div>
